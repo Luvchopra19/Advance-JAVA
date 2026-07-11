@@ -14,7 +14,6 @@ import com.rays.util.JDBCDataSource;
 
 public class UserModel {
 
-	
 	public int nextPk() throws SQLException {
 
 		int pk = 0;
@@ -38,26 +37,33 @@ public class UserModel {
 		UserBean existsBean = findByLogin(bean.getLogin());
 
 		if (existsBean != null) {
-			throw new DuplicatRecordException("email id elredy exists");
+			throw new DuplicatRecordException("email id alredy exists");
 		}
 
-		Connection conn = JDBCDataSource.getConnection();
+		Connection conn = null;
 
-		PreparedStatement pstmt = conn.prepareStatement("insert into st_user values(?, ?, ?, ?, ?, ?)");
+		try {
 
-		pstmt.setInt(1, nextPk());
-		pstmt.setString(2, bean.getFirstName());
-		pstmt.setString(3, bean.getLastName());
-		pstmt.setString(4, bean.getLogin());
-		pstmt.setString(5, bean.getPassword());
-		pstmt.setDate(6, new java.sql.Date(bean.getDob().getTime()));
+			conn = JDBCDataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("insert into st_user values(?, ?, ?, ?, ?, ?)");
 
-		int i = pstmt.executeUpdate();
+			pstmt.setInt(1, nextPk());
+			pstmt.setString(2, bean.getFirstName());
+			pstmt.setString(3, bean.getLastName());
+			pstmt.setString(4, bean.getLogin());
+			pstmt.setString(5, bean.getPassword());
+			pstmt.setDate(6, new java.sql.Date(bean.getDob().getTime()));
 
-		System.out.println(i + " row affected(record inserted)");
+			int i = pstmt.executeUpdate();
 
-		conn.close();
-		pstmt.close();
+			System.out.println(i + " row affected(record inserted)");
+
+			conn.close();
+			pstmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return bean.getId();
 
 	}
@@ -134,7 +140,7 @@ public class UserModel {
 
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/rays", "root", "root");
 
-		PreparedStatement pstmt = conn.prepareStatement("select * from st_user where login = ? and password = ?");
+		PreparedStatement pstmt = conn.prepareStatement("select * from st_user where login = ? and passward = ?");
 
 		pstmt.setString(1, login);
 		pstmt.setString(2, password);

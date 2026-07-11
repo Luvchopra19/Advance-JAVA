@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,12 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="Header.jsp" %>
+	<%@ include file="Header.jsp"%>
 
-<div align="center">
-<h1>UserList View</h1>
-</div>
+	<div align="center">
+		<h1>UserList View</h1>
+	</div>
 
-<%@ include file="Footer.jsp" %>
+	<%@ include file="Footer.jsp"%>
 </body>
 </html>

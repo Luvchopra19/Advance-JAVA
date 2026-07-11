@@ -9,20 +9,47 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rays.bean.UserBean;
+import com.rays.model.UserModel;
+
 @WebServlet("/LoginCtl")
 public class LoginCtl extends HttpServlet {
-	
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		RequestDispatcher rb = request.getRequestDispatcher("LoginView.jsp");
 		rb.forward(request, response);
-		
+
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String login = request.getParameter("login");
+		String password = request.getParameter("password");
+
+		UserBean bean = new UserBean();
+		UserModel model = new UserModel();
+
+		try {
+
+			bean = model.authenticate(login, password);
+			if (bean != null) {
+				System.out.println("login successfully");
+				request.setAttribute("successMsg", "login successfully");
+			} else {
+				System.out.println("invalid login or password");
+				request.setAttribute("errorMsg", "invalid login or password");
+			}
+
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+
+		RequestDispatcher rb = request.getRequestDispatcher("LoginView.jsp");
+		rb.forward(request, response);
 	}
 
 }
