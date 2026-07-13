@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.rays.bean.UserBean;
 import com.rays.model.UserModel;
@@ -17,6 +18,10 @@ public class LoginCtl extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+
+		session.invalidate();
 
 		RequestDispatcher rb = request.getRequestDispatcher("LoginView.jsp");
 		rb.forward(request, response);
@@ -36,15 +41,17 @@ public class LoginCtl extends HttpServlet {
 
 			bean = model.authenticate(login, password);
 			if (bean != null) {
-				System.out.println("login successfully");
-				request.setAttribute("successMsg", "login successfully");
+				HttpSession session = request.getSession();
+				session.setAttribute("user", bean);
+				response.sendRedirect("WelcomeCtl");
+				return;
 			} else {
 				System.out.println("invalid login or password");
 				request.setAttribute("errorMsg", "invalid login or password");
 			}
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 
