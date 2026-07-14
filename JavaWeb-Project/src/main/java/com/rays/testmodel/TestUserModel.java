@@ -12,21 +12,21 @@ import com.rays.model.UserModel;
 public class TestUserModel {
 	
 		public static void main(String[] args) throws Exception {
-			testAdd();
+//			testAdd();
 //			testUpdate();
 //			testdelet();
 	//testfindByLogin();
 //			testfindByPk();
 //			testAuthenticate();
-		//testSearch();
+		testSearch();
 		}
 			private static void testSearch() throws Exception {
 
 				UserModel model = new UserModel();
 				UserBean bean = new UserBean();
 				
-				bean.setFirstName("P");
-				bean.setLastName("Birla");
+//				bean.setFirstName("P");
+//				bean.setLastName("Birla");
 				
 				List list = model.search(bean, 0, 0);
 				

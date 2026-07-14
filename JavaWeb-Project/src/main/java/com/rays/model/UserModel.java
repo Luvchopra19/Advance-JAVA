@@ -93,7 +93,7 @@ public class UserModel {
 	public void delete(UserBean bean) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();
-		
+
 		PreparedStatement pstmt = conn.prepareStatement("delete from st_user where id = ?");
 
 		pstmt.setInt(1, bean.getId());
@@ -135,7 +135,7 @@ public class UserModel {
 	public UserBean authenticate(String login, String password) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();
-		
+
 		PreparedStatement pstmt = conn.prepareStatement("select * from st_user where login = ? and passward = ?");
 
 		pstmt.setString(1, login);
@@ -162,7 +162,7 @@ public class UserModel {
 	public UserBean findByPk(int id) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();
-		
+
 		PreparedStatement pstmt = conn.prepareStatement("select * from st_user where id = ?");
 
 		pstmt.setInt(1, id);
@@ -188,7 +188,7 @@ public class UserModel {
 	public List<UserBean> search(UserBean bean, int pageNo, int pageSize) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();
-		
+
 		StringBuffer sql = new StringBuffer("select * from st_user where 1=1");
 
 		if (bean != null) {

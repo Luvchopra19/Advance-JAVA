@@ -17,8 +17,8 @@
 	if (userBean != null) {
 	%>
 	<h3><%="Hii, " + userBean.getFirstName()%></h3>
-	<a href="#">Add User</a> |
-	<a href="#">User List</a> |
+	<a href="UserCtl">Add User</a> |
+	<a href="UserListCtl">User List</a> |
 	<a href="LoginCtl">Logout</a> |
 	<%
 	} else {
