@@ -106,8 +106,8 @@ public class TestUserModel {
 				UserModel model = new UserModel();
 				UserBean bean = new UserBean();
 				
-				bean.setId(6);
-				model.delete(bean);
+				//bean.setId(6);
+				model.delete(6);
 			
 		}
 			private static void testUpdate() throws Exception {
